@@ -1,0 +1,82 @@
+<br />
+<div class="header row">
+    <div class="col align-self-center">
+        <h4> <b>Weather forecast</b></h4>
+        <br />
+    </div>
+</div>
+<form>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="stateCode">State</label>
+                <input type="text" class="form-control" name="state" id="stateCode" [(ngModel)]="state"
+                    placeholder="Enter state code">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="cityName">City</label>
+                <input type="text" class="form-control" name="city" [(ngModel)]="city" id="cityName"
+                    placeholder="Enter city name">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <button type="submit" style="margin-top:28px" (click)="getWeatherDetails()" class="btn btn-primary">Get
+                    Report</button>
+            </div>
+        </div>
+    </div>
+</form>
+<br/>
+
+<!-- <div class="e-loader" *ngIf="!dataLoaded">
+  <img src="../../Assets/loader.gif" />
+</div> -->
+
+<div class="e-error" *ngIf="errorCard">
+  <h3>Oops!</h3>
+  <p>Please recheck the city and state entered</p>
+</div>
+<div class="e-data" *ngIf="dataLoaded">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{todayWeather.name}}, {{todayWeather.sys.country}} - <span>{{todayWeather.date}}</span></h5>
+                    <p>{{todayWeather.weather[0].description}}</p>
+                    <img [src]="getIconImageUrl(todayWeather.weather[0].icon)" />
+                    <p class="card-text">Temparature: {{todayWeather.main.temp}}&#8457;</p>
+                    High: {{todayWeather.main.temp_max}}&#8457;&nbsp;&#126;&nbsp;
+                    Low: {{todayWeather.main.temp_min}}&#8457;
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Forecast report</h5>
+                    <hr/>
+                    <p>Wind speed(mph) - <span>{{todayWeather.wind.speed}}</span></p>
+                    <p>Pressure(MB) - <span>{{todayWeather.main.pressure}}</span></p>
+                    <p>Humidity - <span>{{todayWeather.main.humidity}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+
+    <div class="hourly-weather">
+      <div class="d-flex justify-content-between">
+        <div class="card" *ngFor="let day of fiveHrsData">
+            <div class="card-body">
+                <img [src]="day.iconUrl" />
+                <h5 class="card-title">{{day.weather[0].description}}</h5>
+                <p class="card-text">Temparature: {{day.main.temp}}&#8457;</p>
+                <p class="card-text">{{day.displayTime}}</p>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
